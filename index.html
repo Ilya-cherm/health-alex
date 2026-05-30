@@ -30,6 +30,85 @@
   </style>
 </head>
 <body>
+  <div id="password-overlay" style="
+  position: fixed;
+  inset: 0;
+  background: #0b0b0b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  font-family: Arial, sans-serif;
+">
+  <div style="
+    width: 100%;
+    max-width: 360px;
+    padding: 24px;
+    background: #1a1a1a;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+    text-align: center;
+  ">
+    <h2 style="margin: 0 0 12px;">Закрытый доступ</h2>
+    <p style="margin: 0 0 16px; color: #cfcfcf;">Введите пароль, чтобы открыть сайт</p>
+    <input
+      id="site-password"
+      type="password"
+      placeholder="Пароль"
+      style="
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #444;
+        margin-bottom: 12px;
+        font-size: 16px;
+      "
+    />
+    <button
+      onclick="checkPassword()"
+      style="
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: #2d6cdf;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      "
+    >
+      Войти
+    </button>
+    <p id="password-error" style="color: #ff7b7b; margin-top: 12px; display: none;">
+      Неверный пароль
+    </p>
+  </div>
+</div>
+
+<script>
+  function checkPassword() {
+    const correctPassword = "alex2026";
+    const input = document.getElementById("site-password").value;
+    const error = document.getElementById("password-error");
+    const overlay = document.getElementById("password-overlay");
+
+    if (input === correctPassword) {
+      overlay.style.display = "none";
+    } else {
+      error.style.display = "block";
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      const overlay = document.getElementById("password-overlay");
+      if (overlay && overlay.style.display !== "none") {
+        checkPassword();
+      }
+    }
+  });
+</script>
 <div class="wrap">
   <header class="top">
     <div class="titlebox"><div class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16c2.2 0 2.2-8 4.4-8s2.2 12 4.4 12 2.2-14 4.4-14S19.4 16 20 16"/></svg></div><div><h1>Clinical Dashboard</h1><p class="sub">Обезличенный клинический сайт с полной структурой данных: лабораторная динамика, инструментальные исследования, диагнозы, урологический и гормональный блок, терапия, факторы риска и план наблюдения.</p></div></div>
